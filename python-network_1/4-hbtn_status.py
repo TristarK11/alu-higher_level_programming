@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import requests
 
-url = "https://alu-intranet.hbtn.io/status"
+url = "http://0.0.0.0:5050/status"
 
 # Fetching the URL using requests
 response = requests.get(url)
