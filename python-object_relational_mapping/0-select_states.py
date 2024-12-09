@@ -1,17 +1,22 @@
 #!/usr/bin/python3
-"""
-This module supplies one function.
-"""
+""" lists all the states from a given database"""
+import sys
+import MySQLdb
 
-
-def add_integer(a, b):
-    """The addition of 2 numbers."""
-    if type(a) is not int and type(a) is not float:
-        raise TypeError("a must be an integer")
-    if type(b) is not int and type(b) is not float:
-        raise TypeError("b must be an integer")
-    if type(a) is float:
-        a = int(a)
-    if type(b) is float:
-        b = int(b)
-    return a + b
+if __name__ == "__main__":
+    """ setting the file as a script"""
+    with MySQLdb.connect(
+        user=sys.argv[1],
+        passwd=sys.argv[2],
+        db=sys.argv[3],
+        host='localhost',
+        port=3306
+    )as s:
+        cur = s.cursor()
+        cur.execute(
+                "SELECT * FROM states ORDER BY id ASC"
+            )
+        all_states = cur.fetchall()
+        for each_state in all_states:
+            print(each_state)
+        cur.close()
